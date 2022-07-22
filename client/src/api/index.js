@@ -1,14 +1,12 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:6000' });
-
-API.interceptors.request.use((req) => {
-  if (localStorage.getItem('profile')) {
-    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+const API = axios.create({
+  baseURL: "https://mern-snap.herokuapp.com/",
+  // baseURL: "http://localhost:5000/api/v1/restaurants",
+  headers: {
+    "Content-type": "application/json"
   }
-
-  return req;
-});
+})
 
 export const fetchPost = (id) => API.get(`/posts/${id}`);
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
